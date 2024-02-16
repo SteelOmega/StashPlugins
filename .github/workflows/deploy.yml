@@ -15,10 +15,10 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout main
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v4
         with:
           path: main
           ref: main
@@ -26,7 +26,16 @@ jobs:
       - run: |
           cd main
           ./build_site.sh ../_site/stable
-      - uses: actions/upload-pages-artifact@v3.0.1
+      - name: Checkout develop
+        uses: actions/checkout@v4
+        with:
+          path: develop
+          ref: develop
+          fetch-depth: "0"
+      - run: |
+          cd develop
+          ./build_site.sh ../_site/develop
+      - uses: actions/upload-pages-artifact@v3
 
   deploy:
     environment:
@@ -37,4 +46,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4.0.4
+        uses: actions/deploy-pages@v4

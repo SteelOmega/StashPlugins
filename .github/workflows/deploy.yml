@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout main
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.1
         with:
           path: main
           ref: main
@@ -26,17 +26,7 @@ jobs:
       - run: |
           cd main
           ./build_site.sh ../_site/stable
-      - name: Checkout dev
-        uses: actions/checkout@v2
-        with:
-          path: dev
-          # change this ref to whatever dev branch/tag we need when necessary
-          ref: main
-          fetch-depth: "0"
-      - run: |
-          cd dev
-          ../main/build_site.sh ../_site/develop
-      - uses: actions/upload-pages-artifact@v2
+      - uses: actions/upload-pages-artifact@v3.0.1
 
   deploy:
     environment:
@@ -47,4 +37,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4.0.4

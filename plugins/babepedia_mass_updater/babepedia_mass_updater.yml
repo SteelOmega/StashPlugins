@@ -1,0 +1,12 @@
+name: "Babepedia Mass Updater"
+description: Updates missing performer metadata from Babepedia
+version: 1.0
+exec:
+  - python
+  - "{pluginDir}/babepedia_mass_updater.py"
+interface: raw
+tasks:
+  - name: 'Update'
+    description: 'Update missing performer metadata from Babepedia'
+    defaultArgs:
+      mode: run_updater

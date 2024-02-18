@@ -17,15 +17,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout ${{ github.ref##*/ }}
+      - name: Checkout ${{ github.ref_name }}
         uses: actions/checkout@v4
         with:
-          path: ${{ github.ref##*/ }}
+          path: ${{ github.ref_name }}
           ref: ${{ github.ref }}
           fetch-depth: "0"
       - run: |
-          cd ${{ github.ref }}
-          ./build_site.sh ../_site/${{ github.ref##*/ }}
+          cd ${{ github.ref_name }}
+          ./build_site.sh ../_site/${{ github.ref_name }}
 
   deploy:
     environment:
